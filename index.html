@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Jazz Design | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="images/logoico.ico" href="images/logoico.ico">
+</head>
+
+<body>
+    <header id="main-header">
+        <div class="container">
+            <img src="images/logo.webp" alt="Jazz Design Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">Over ons</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>Ontwerp je kleding met stijl en passie</h2>
+            <p>Bij Jazz Design drukken we jouw unieke prints op kleding van hoge kwaliteit.</p>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Voorbeelden van ontwerpen die wij hebben gemaakt.</h2>
+            <div class="gallery-grid">
+                <img src="images/dansselectie.webp"     class="gallery-item phone" alt=""
+                data-title=""
+                data-description="">
+                <img src="images/jackets.webp"          class="gallery-item phone" alt="">
+                <img src="images/MartialArtsfront.webp" class="gallery-item phone" alt="">
+                <img src="images/MartialArts.webp"      class="gallery-item laptop" alt="">
+                <img src="images/CIOStruienfront.webp"  class="gallery-item phone" alt="">
+                <img src="images/CIOStruien.webp"       class="gallery-item phone" alt="">
+                <img src="images/onesi.webp"            class="gallery-item laptop" alt="">
+                <img src="images/koosje.webp"           class="gallery-item phone" alt="">
+                <img src="images/crew.webp"             class="gallery-item phone" alt="">
+                <img src="images/turnen.webp"           class="gallery-item laptop" alt="">
+                <img src="images/turneneen.webp"        class="gallery-item tablet" alt="">
+                <img src="images/kaartje.webp"          class="gallery-item phone" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Image Enlargement -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modal-image" src="" alt="">
+            <div class="image-info">
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
+            </div>
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
+    </div>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contacteer ons</h2>
+            <p>Ben je geintreseerd? Vul het onderstaande formulier in en we nemen snel
+                contact met je op via de mail!</p>
+
+            <form id="contact-form" action="https://formspree.io/f/xeoqokkb" method="POST">
+                <div class="form-group">
+                    <label for="name">Naam:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mailadres:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Bericht:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Verstuur</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Jazz Design | Alle rechten voorbehouden</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
