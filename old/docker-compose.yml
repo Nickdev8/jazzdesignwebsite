@@ -1,8 +1,0 @@
-name: jazzdesign
-services:
-  web:
-    build: .
-    image: jazzdesign:prod
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:3050:80"

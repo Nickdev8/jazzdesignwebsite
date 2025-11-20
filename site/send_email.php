@@ -1,52 +1,59 @@
 <?php
-$errors = [];
+declare(strict_types=1);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get POST data
-    $name = isset($_POST['name']) ? strip_tags(trim($_POST['name'])) : '';
-    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-    $message = isset($_POST['message']) ? strip_tags(trim($_POST['message'])) : '';
-
-    // Validate form fields
-    if (empty($name)) {
-        $errors[] = 'Name is empty';
-    }
-
-    if (empty($email)) {
-        $errors[] = 'Email is empty';
-    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = 'Email is invalid';
-    }
-
-    if (empty($message)) {
-        $errors[] = 'Message is empty';
-    }
-
-    // If no errors, send email
-    if (empty($errors)) {
-        // Recipient email address (replace with your own)
-        $recipient = "nick.esselman@gmail.com";
-        $subject = "New Contact Form Submission";
-
-        // Additional headers
-        $headers = "From: $name <$email>";
-
-        // Send email
-        if (mail($recipient, $subject, $message, $headers)) {
-            echo "Email sent successfully!";
-        } else {
-            echo "Failed to send email. Please try again later.";
-        }
-    } else {
-        // Display errors
-        echo "The form contains the following errors:<br>";
-        foreach ($errors as $error) {
-            echo "- $error<br>";
-        }
-    }
-} else {
-    // Not a POST request, display a 405 Method Not Allowed error
-    header("HTTP/1.1 405 Method Not Allowed");
-    echo "Method not allowed.";
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: contact.php?status=validation');
+    exit;
 }
-?>
+
+function clean(string $value): string
+{
+    return trim(filter_var($value, FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH));
+}
+
+$name = clean($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$projectType = clean($_POST['project_type'] ?? 'Algemeen');
+$message = trim($_POST['message'] ?? '');
+$honeypot = trim($_POST['website'] ?? '');
+
+if ($honeypot !== '') {
+    header('Location: contact.php?status=sent');
+    exit;
+}
+
+$errors = [];
+if ($name === '') {
+    $errors[] = 'name';
+}
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'email';
+}
+if (strlen($message) < 10) {
+    $errors[] = 'message';
+}
+
+if (!empty($errors)) {
+    header('Location: contact.php?status=validation');
+    exit;
+}
+
+$recipient = 'nick.esselman@gmail.com';
+$subject = 'Jazz Design | Nieuw bericht (' . ($projectType ?: 'Algemeen') . ')';
+$body = "Naam: {$name}\nE-mail: {$email}\nProjecttype: {$projectType}\n\nBericht:\n{$message}\n\nVerzonden via het Jazz Design contactformulier.";
+
+$headers = [
+    'From: Jazz Design Contact <no-reply@jazzdesign.local>',
+    'Reply-To: ' . $name . ' <' . $email . '>',
+    'Content-Type: text/plain; charset=UTF-8',
+];
+
+$sent = mail($recipient, $subject, $body, implode("\r\n", $headers));
+
+if ($sent) {
+    header('Location: contact.php?status=sent');
+} else {
+    header('Location: contact.php?status=failed');
+}
+
+exit;

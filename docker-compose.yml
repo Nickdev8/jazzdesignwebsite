@@ -1,11 +1,11 @@
-name: nickesselman-nl
+name: jazzdesign
 services:
-  caddy:
+  web:
     image: caddy:2-alpine
     restart: unless-stopped
     depends_on: [php]
     ports:
-      - "127.0.0.1:3010:80"   # keep 3010 now that we freed it
+      - "127.0.0.1:3050:80"
     volumes:
       - ./site:/srv/site
       - ./Caddyfile:/etc/caddy/Caddyfile
