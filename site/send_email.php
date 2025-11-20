@@ -6,15 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-function clean(string $value): string
-{
-    return trim(filter_var($value, FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH));
-}
-
-$name = clean($_POST['name'] ?? '');
+$name = trim(strip_tags($_POST['name'] ?? ''));
 $email = trim($_POST['email'] ?? '');
-$projectType = clean($_POST['project_type'] ?? 'Algemeen');
-$message = trim($_POST['message'] ?? '');
+$projectType = trim(strip_tags($_POST['project_type'] ?? 'Algemeen'));
+$message = trim(strip_tags($_POST['message'] ?? ''));
 $honeypot = trim($_POST['website'] ?? '');
 
 if ($honeypot !== '') {
@@ -29,7 +24,7 @@ if ($name === '') {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = 'email';
 }
-if (strlen($message) < 10) {
+if (strlen($message) < 6) {
     $errors[] = 'message';
 }
 

@@ -53,10 +53,10 @@ if ($status === 'sent') {
                 <?php endif; ?>
                 <form action="send_email.php" method="post">
                     <label for="name">Naam</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" autocomplete="name" required>
 
                     <label for="email">E-mailadres</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
 
                     <label for="project_type">Wat wil je laten maken?</label>
                     <select id="project_type" name="project_type">
@@ -72,7 +72,7 @@ if ($status === 'sent') {
 
                     <div class="hidden-field" aria-hidden="true">
                         <label for="website">Laat dit leeg</label>
-                        <input type="text" id="website" name="website" tabindex="-1">
+                        <input type="hidden" id="website" name="website">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Verstuur bericht</button>
