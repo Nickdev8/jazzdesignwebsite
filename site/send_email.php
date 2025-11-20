@@ -38,7 +38,7 @@ if (!empty($errors)) {
     exit;
 }
 
-$recipient = 'nick.esselman@gmail.com';
+$recipient = getenv('CONTACT_RECIPIENT') ?: 'nick.esselman@gmail.com';
 $subject = 'Jazz Design | Nieuw bericht (' . ($projectType ?: 'Algemeen') . ')';
 $body = "Naam: {$name}\nE-mail: {$email}\nProjecttype: {$projectType}\n\nBericht:\n{$message}\n\nVerzonden via het Jazz Design contactformulier.";
 

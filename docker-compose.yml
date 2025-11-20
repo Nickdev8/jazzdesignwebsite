@@ -13,5 +13,7 @@ services:
   php:
     image: php:8.2-fpm-alpine
     restart: unless-stopped
+    env_file:
+      - .env
     volumes:
       - ./site:/srv/site
