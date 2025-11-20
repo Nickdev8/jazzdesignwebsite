@@ -3,11 +3,11 @@ $status = isset($_GET['status']) ? preg_replace('/[^a-z]/', '', $_GET['status'])
 $flash = null;
 
 if ($status === 'sent') {
-    $flash = ['type' => 'success', 'text' => 'Bedankt! Je bericht is verstuurd. We reageren snel.'];
+    $flash = ['type' => 'success', 'text' => 'Bedankt! Je bericht is verzonden. We reageren zo snel mogelijk.'];
 } elseif ($status === 'validation') {
-    $flash = ['type' => 'error', 'text' => 'Controleer je gegevens: naam, e-mail en bericht zijn verplicht.'];
+    $flash = ['type' => 'error', 'text' => 'Check je naam en e-mailadres. Je bericht mag kort zijn.'];
 } elseif ($status === 'failed') {
-    $flash = ['type' => 'error', 'text' => 'Versturen lukte niet. Probeer het opnieuw of mail direct naar nick.esselman@gmail.com.'];
+    $flash = ['type' => 'error', 'text' => 'Versturen lukt niet (mailserver). Stuur ons rechtstreeks: nick.esselman@gmail.com.'];
 }
 ?>
 <!DOCTYPE html>

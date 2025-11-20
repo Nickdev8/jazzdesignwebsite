@@ -24,9 +24,6 @@ if ($name === '') {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = 'email';
 }
-if (strlen($message) < 6) {
-    $errors[] = 'message';
-}
 
 if (!empty($errors)) {
     header('Location: contact.php?status=validation');
